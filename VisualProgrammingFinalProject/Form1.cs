@@ -21,22 +21,21 @@ namespace VisualProgrammingFinalProject
             var cities = GetCities();
             cmbCities.DataSource = cities;
             cmbCities.DisplayMember = "title";
-            cmbCities.ValueMember = "id"; // Burada id doğru
-            cmbCities.SelectedIndex = -1; // İlk başta bir seçim olmasın
+            cmbCities.ValueMember = "id"; 
+            cmbCities.SelectedIndex = -1; 
         }
 
         private void cmbCities_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbCities.SelectedValue != null && cmbCities.SelectedValue is int)
             {
-                int cityId = (int)cmbCities.SelectedValue; // SelectedIndex yerine SelectedValue kullanarak id'yi alın
+                int cityId = (int)cmbCities.SelectedValue; 
                 var counties = GetCountiesByCity(cityId);
                 cmbCounties.DataSource = counties;
                 cmbCounties.DisplayMember = "title";
-                cmbCounties.ValueMember = "id"; // Burada id doğru
+                cmbCounties.ValueMember = "id"; 
             }
         }
-
 
         #region Database Functions
 
@@ -45,7 +44,6 @@ namespace VisualProgrammingFinalProject
         {
             using (var context = new SchoolManagementSystemEntities())
             {
-                // Assuming PasswordHash is already a hashed value
                 return context.Users.Any(user => user.Username == username && user.PasswordHash == password);
             }
         }
