@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Balance and Restrictions</h2>
+<hr>
+<div class="balance-container">
+    <h3>Balance</h3>
+    <p><strong>Balance:</strong> {{ balance }}</p>
+</div>
+<div class="restrictions-container">
+    <h3>Parent Restrictions</h3>
+    <ul>
+        {% for restriction in restrictions %}
+        <li>{{ restriction }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+<style>
+    .balance-container, .restrictions-container {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+        .balance-container h3, .restrictions-container h3 {
+            margin-top: 0;
+        }
+
+        .balance-container p {
+            font-size: 1.2em;
+        }
+</style>

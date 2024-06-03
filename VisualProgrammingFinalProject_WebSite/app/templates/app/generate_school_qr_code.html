@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Generate School QR Code</h2>
+<hr>
+<button id="generate-qr" class="btn btn-primary">Generate QR Code</button>
+<br>
+<br>
+<div id="qr-code-container">
+    <img id="qr-code" src="" alt="QR Code" style="display:none;">
+    <br>
+    <button id="scan-qr" class="btn btn-success" style="display:none;">Scan QR Code</button>
+</div>
+{% endblock %}
+
+<script>
+    document.getElementById('generate-qr').addEventListener('click', function() {
+        // Simulate QR code generation
+        document.getElementById('qr-code').src = "generated_qr_code.png"; // replace with actual generated QR code path
+        document.getElementById('qr-code').style.display = "block";
+        document.getElementById('scan-qr').style.display = "block";
+    });
+
+    document.getElementById('scan-qr').addEventListener('click', function() {
+        // Simulate QR code scanning
+        fetch('{% url "process_qr_code" "school" %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("QR Code scanned and processed.");
+            // Here you can add any additional actions after QR code scan is processed
+        });
+    });
+</script>

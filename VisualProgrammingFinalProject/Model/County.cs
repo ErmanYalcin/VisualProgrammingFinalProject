@@ -12,7 +12,7 @@ namespace VisualProgrammingFinalProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class County
+    public partial class county
     {
         public int id { get; set; }
         public int city_id { get; set; }

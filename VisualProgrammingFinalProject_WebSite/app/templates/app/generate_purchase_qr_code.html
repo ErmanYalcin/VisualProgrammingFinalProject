@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Generate Purchase QR Code</h2>
+<hr>
+<div id="items-container">
+    {% for item in items %}
+    <div class="item-card">
+        <h3>{{ item.ItemName }}</h3>
+        <p>Price: {{ item.Price }}</p>
+        <p>Stock: {{ item.Stock }}</p>
+        <input type="number" id="quantity-{{ item.ItemID }}" min="1" max="{{ item.Stock }}" value="1">
+        <button class="btn btn-primary" onclick="generateQrCode({{ item.ItemID }}, '{{ item.ItemName }}', {{ item.Price }})">Generate QR Code</button>
+        <br><br>
+        <div id="qr-code-container-{{ item.ItemID }}" style="display:none;">
+            <img id="qr-code-{{ item.ItemID }}" src="" alt="QR Code">
+            <br>
+            <button id="scan-qr-{{ item.ItemID }}" class="btn btn-success" onclick="scanQrCode({{ item.ItemID }})">Scan QR Code</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<script>
+    function generateQrCode(itemId, itemName, itemPrice) {
+        var quantity = $('#quantity-' + itemId).val();
+        // Simulate QR code generation
+        $('#qr-code-' + itemId).attr('src', "/generate_qr_code/" + itemId + "/" + quantity); // replace with actual generated QR code path
+        $('#qr-code-container-' + itemId).show();
+    }
+
+    function scanQrCode(itemId) {
+        var quantity = $('#quantity-' + itemId).val();
+        // Simulate QR code scanning
+        $.ajax({
+            url: '{% url "process_qr_code" "purchase" %}',
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json',
+            },
+            data: JSON.stringify({ item_id: itemId, quantity: quantity }),
+            success: function(response) {
+                alert("QR Code scanned and processed for purchase.");
+                // Here you can add any additional actions after QR code scan is processed
+            },
+            error: function(response) {
+                alert("Error processing QR Code: " + response.message);
+            }
+        });
+    }
+</script>
+
+<style>
+    .item-card {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+        .item-card h3 {
+            margin-top: 0;
+        }
+
+        .item-card p {
+            font-size: 1.1em;
+        }
+</style>

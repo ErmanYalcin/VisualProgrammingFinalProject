@@ -20,6 +20,7 @@ namespace VisualProgrammingFinalProject.Model
             this.Attendances = new HashSet<Attendance>();
             this.CafeteriaPurchases = new HashSet<CafeteriaPurchas>();
             this.Transactions = new HashSet<Transaction>();
+            this.ParentRestrictions = new HashSet<ParentRestriction>();
         }
     
         public int StudentID { get; set; }
@@ -29,7 +30,7 @@ namespace VisualProgrammingFinalProject.Model
         public string Address { get; set; }
         public Nullable<int> ParentID { get; set; }
         public Nullable<int> ClassID { get; set; }
-        public decimal Balance { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
@@ -39,5 +40,7 @@ namespace VisualProgrammingFinalProject.Model
         public virtual Parent Parent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaction> Transactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParentRestriction> ParentRestrictions { get; set; }
     }
 }

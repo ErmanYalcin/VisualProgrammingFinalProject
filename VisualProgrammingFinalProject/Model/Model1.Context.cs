@@ -15,10 +15,10 @@ namespace VisualProgrammingFinalProject.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SchoolManagementSystemEntities : DbContext
+    public partial class SchoolManagementSystemEntities1 : DbContext
     {
-        public SchoolManagementSystemEntities()
-            : base("name=SchoolManagementSystemEntities")
+        public SchoolManagementSystemEntities1()
+            : base("name=SchoolManagementSystemEntities1")
         {
         }
     
@@ -30,17 +30,17 @@ namespace VisualProgrammingFinalProject.Model
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<CafeteriaItem> CafeteriaItems { get; set; }
         public virtual DbSet<CafeteriaPurchas> CafeteriaPurchases { get; set; }
-        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<city> cities { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<County> Counties { get; set; }
+        public virtual DbSet<county> counties { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<PurchaseRestriction> PurchaseRestrictions { get; set; }
+        public virtual DbSet<ParentRestriction> ParentRestrictions { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

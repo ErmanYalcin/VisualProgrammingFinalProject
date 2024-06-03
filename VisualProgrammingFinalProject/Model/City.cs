@@ -12,7 +12,7 @@ namespace VisualProgrammingFinalProject.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class city
     {
         public int id { get; set; }
         public string title { get; set; }

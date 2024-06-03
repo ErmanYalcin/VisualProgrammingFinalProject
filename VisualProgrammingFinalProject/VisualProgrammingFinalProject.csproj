@@ -55,11 +55,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CafeteriaManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CafeteriaManagementForm.Designer.cs">
+      <DependentUpon>CafeteriaManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClassManagementForm.Designer.cs">
+      <DependentUpon>ClassManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassViewModel.cs" />
+    <Compile Include="StudentManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentManagementForm.Designer.cs">
+      <DependentUpon>StudentManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentViewModel.cs" />
+    <Compile Include="TeacherManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TeacherManagementForm.Designer.cs">
+      <DependentUpon>TeacherManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="loginform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loginform.Designer.cs">
+      <DependentUpon>loginform.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Attendance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -70,13 +102,13 @@
     <Compile Include="Model\CafeteriaPurchas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\City.cs">
+    <Compile Include="Model\city.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Class.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\County.cs">
+    <Compile Include="Model\county.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model1.Context.cs">
@@ -97,7 +129,7 @@
     <Compile Include="Model\Parent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PurchaseRestriction.cs">
+    <Compile Include="Model\ParentRestriction.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Report.cs">
@@ -126,8 +158,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ParentManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParentManagementForm.Designer.cs">
+      <DependentUpon>ParentManagementForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CafeteriaManagementForm.resx">
+      <DependentUpon>CafeteriaManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClassManagementForm.resx">
+      <DependentUpon>ClassManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentManagementForm.resx">
+      <DependentUpon>StudentManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeacherManagementForm.resx">
+      <DependentUpon>TeacherManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loginform.resx">
+      <DependentUpon>loginform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -137,12 +190,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ParentManagementForm.resx">
+      <DependentUpon>ParentManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Database Backup File\SchoolManagementSystem.bak" />
     <EntityDeploy Include="Model\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Database Backup File\SchoolManagementSystem.bak" />
     <None Include="Model\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -161,19 +218,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\user_24px.png" />
+    <None Include="Resources\staff_96px.png" />
+    <None Include="Resources\report_card_24px.png" />
+    <None Include="Resources\monitor_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

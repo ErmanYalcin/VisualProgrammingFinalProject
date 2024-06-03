@@ -4,29 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d26a047fb9cf4db8950d05008f31ff61" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="710913f34e624eacb9ab843cd21dbe27" Name="Diagram1" ZoomLevel="45">
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Attendance" Width="1.5" PointX="7.5" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.CafeteriaItem" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.CafeteriaPurchas" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagementSystemModel.City" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagementSystemModel.city" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Class" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagementSystemModel.County" Width="1.5" PointX="2.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchoolManagementSystemModel.county" Width="1.5" PointX="2.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Parent" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Report" Width="1.5" PointX="4.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Student" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagementSystemModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Teacher" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SchoolManagementSystemModel.Transaction" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SchoolManagementSystemModel.User" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Attendanc__Stude__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Cafeteria__ItemI__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Cafeteria__Stude__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Classes__Teacher__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Students__ClassI__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__Students__Parent__3F466844" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SchoolManagementSystemModel.User" Width="1.5" PointX="7.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Attendanc__Stude__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Cafeteria__ItemI__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Cafeteria__Stude__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Classes__Teacher__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Students__ClassI__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__Students__Parent__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="SchoolManagementSystemModel.FK__Transacti__Stude__4F7CD00D" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SchoolManagementSystemModel.PurchaseRestriction" Width="1.5" PointX="10.5" PointY="0.875" />
-        <AssociationConnector Association="SchoolManagementSystemModel.FK__PurchaseR__Cafet__656C112C" />
+        <EntityTypeShape EntityType="SchoolManagementSystemModel.ParentRestriction" Width="1.5" PointX="10.5" PointY="2.75" />
+        <EntityTypeShape EntityType="SchoolManagementSystemModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__ParentRes__Restr__6383C8BA" />
+        <AssociationConnector Association="SchoolManagementSystemModel.FK__ParentRes__Stude__628FA481" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Application{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRkU6s1mB4iBOv5rF5H6WV8D1Y5vr5e/6lqIf12dV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <hr>
+        <ul>
+            <li><a href="{% url 'students' %}">Balance and Restrictions</a></li>
+            <li><a href="{% url 'generate_school_qr_code' %}">Generate School QR Code</a></li>
+            <li><a href="{% url 'generate_purchase_qr_code' %}">Generate Purchase QR Code</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h1>{% block header %}Parent Dashboard{% endblock %}</h1>
+        <hr>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisualProgrammingFinalProject.Model;
 
@@ -14,27 +9,99 @@ namespace VisualProgrammingFinalProject
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private string loggedInUser;
+        private string userRole;
+
+        public Form1(string username)
         {
             InitializeComponent();
+            loggedInUser = username;
+            this.Text = $"Welcome, {loggedInUser}";
+
+            SetUserRole();
+            SetupButtonsBasedOnRole();
 
             var cities = GetCities();
-            cmbCities.DataSource = cities;
-            cmbCities.DisplayMember = "title";
-            cmbCities.ValueMember = "id"; 
-            cmbCities.SelectedIndex = -1; 
         }
 
-        private void cmbCities_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetUserRole()
         {
-            if (cmbCities.SelectedValue != null && cmbCities.SelectedValue is int)
+            using (var context = new SchoolManagementSystemEntities1())
             {
-                int cityId = (int)cmbCities.SelectedValue; 
-                var counties = GetCountiesByCity(cityId);
-                cmbCounties.DataSource = counties;
-                cmbCounties.DisplayMember = "title";
-                cmbCounties.ValueMember = "id"; 
+                var user = context.Users.FirstOrDefault(u => u.Username == loggedInUser);
+                if (user != null)
+                {
+                    userRole = user.Role;
+                }
             }
+        }
+
+        private void SetupButtonsBasedOnRole()
+        {
+            if (userRole == "management")
+            {
+                // Okul Yönetimi Butonları
+                btnStudentManagement.Visible = true;
+                btnTeacherManagement.Visible = true;
+                btnParentManagement.Visible = true;
+                btnClassManagement.Visible = true;
+
+                // Kantin Butonları
+                btnCafeteriaManagement.Visible = false;
+            }
+            else if (userRole == "canteen")
+            {
+                // Kantin Butonları
+                btnCafeteriaManagement.Visible = true;
+
+                // Okul Yönetimi Butonları
+                btnStudentManagement.Visible = false;
+                btnTeacherManagement.Visible = false;
+                btnParentManagement.Visible = false;
+                btnClassManagement.Visible = false;
+            }
+        }
+
+        public void loadform(object Form)
+        {
+            if (this.mainpanel.Controls.Count > 0)
+                this.mainpanel.Controls.RemoveAt(0);
+            Form f = Form as Form;
+            f.TopLevel = false;
+            f.Dock = DockStyle.Fill;
+            this.mainpanel.Controls.Add(f);
+            this.mainpanel.Tag = f;
+            f.Show();
+        }
+
+        private void btnStudentManagement_Click(object sender, EventArgs e)
+        {
+            loadform(new StudentManagementForm());
+        }
+
+        private void btnTeacherManagement_Click(object sender, EventArgs e)
+        {
+            loadform(new TeacherManagementForm());
+        }
+
+        private void btnParentManagement_Click(object sender, EventArgs e)
+        {
+            loadform(new ParentManagementForm());
+        }
+
+        private void btnClassManagement_Click(object sender, EventArgs e)
+        {
+            loadform(new ClassManagementForm());
+        }
+
+        private void btnCafeteriaManagement_Click(object sender, EventArgs e)
+        {
+            loadform(new CafeteriaManagementForm());
+        }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         #region Database Functions
@@ -42,7 +109,7 @@ namespace VisualProgrammingFinalProject
         #region Login Functions
         public bool Login(string username, string password)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.Users.Any(user => user.Username == username && user.PasswordHash == password);
             }
@@ -53,7 +120,7 @@ namespace VisualProgrammingFinalProject
         #region Student Functions
         public void AddStudent(Student student)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 context.Students.Add(student);
                 context.SaveChanges();
@@ -61,7 +128,7 @@ namespace VisualProgrammingFinalProject
         }
         public void UpdateStudent(Student student)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 context.Entry(student).State = EntityState.Modified;
                 context.SaveChanges();
@@ -69,7 +136,7 @@ namespace VisualProgrammingFinalProject
         }
         public void DeleteStudent(int studentId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 var student = context.Students.Find(studentId);
                 if (student != null)
@@ -81,7 +148,7 @@ namespace VisualProgrammingFinalProject
         }
         public Student GetStudent(int studentId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.Students.Find(studentId);
             }
@@ -89,7 +156,7 @@ namespace VisualProgrammingFinalProject
 
         public List<Student> GetAllStudents()
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.Students.ToList();
             }
@@ -99,7 +166,7 @@ namespace VisualProgrammingFinalProject
         #region Parent Functions
         public void AddParent(Parent parent)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 context.Parents.Add(parent);
                 context.SaveChanges();
@@ -107,7 +174,7 @@ namespace VisualProgrammingFinalProject
         }
         public void UpdateParent(Parent parent)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 context.Entry(parent).State = EntityState.Modified;
                 context.SaveChanges();
@@ -115,7 +182,7 @@ namespace VisualProgrammingFinalProject
         }
         public void DeleteParent(int parentId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 var parent = context.Parents.Find(parentId);
                 if (parent != null)
@@ -127,7 +194,7 @@ namespace VisualProgrammingFinalProject
         }
         public Parent GetParent(int parentId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.Parents.Find(parentId);
             }
@@ -135,7 +202,7 @@ namespace VisualProgrammingFinalProject
 
         public List<Parent> GetAllParents()
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.Parents.ToList();
             }
@@ -145,14 +212,14 @@ namespace VisualProgrammingFinalProject
         #region Cafeteria Functions
         public List<CafeteriaPurchas> GetCafeteriaPurchases(int studentId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 return context.CafeteriaPurchases.Where(p => p.StudentID == studentId).ToList();
             }
         }
         public bool MakePurchase(int studentId, int cafeteriaItemId, int quantity)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 var student = context.Students.Find(studentId);
                 var cafeteriaItem = context.CafeteriaItems.Find(cafeteriaItemId);
@@ -182,7 +249,7 @@ namespace VisualProgrammingFinalProject
         }
         public bool CanPurchase(int studentId, int cafeteriaItemId, int quantity)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
                 var student = context.Students.Find(studentId);
                 var cafeteriaItem = context.CafeteriaItems.Find(cafeteriaItemId);
@@ -190,8 +257,8 @@ namespace VisualProgrammingFinalProject
                 if (student != null && cafeteriaItem != null)
                 {
                     // Alışveriş kısıtlamalarını kontrol et
-                    var restrictions = context.PurchaseRestrictions
-                        .Where(r => r.StudentID == studentId && r.CafeteriaItemID == cafeteriaItemId)
+                    var restrictions = context.ParentRestrictions
+                        .Where(r => r.StudentID == studentId && r.RestrictedItemID == cafeteriaItemId)
                         .FirstOrDefault();
 
                     if (restrictions != null)
@@ -212,23 +279,33 @@ namespace VisualProgrammingFinalProject
         #endregion
 
         #region City and County Functions
-        public List<City> GetCities()
+        public List<city> GetCities()
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
-                return context.Cities.ToList();
+                return context.cities.ToList();
             }
         }
 
-        public List<County> GetCountiesByCity(int cityId)
+        public List<county> GetCountiesByCity(int cityId)
         {
-            using (var context = new SchoolManagementSystemEntities())
+            using (var context = new SchoolManagementSystemEntities1())
             {
-                return context.Counties.Where(c => c.city_id == cityId).ToList();
+                return context.counties.Where(c => c.city_id == cityId).ToList();
             }
         }
 
         #endregion
+        #endregion
+
+        #region Logout Function
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Form1'i gizle
+            loginform loginForm = new loginform();
+            loginForm.ShowDialog(); // Login formunu göster
+            this.Close(); // Form1'i kapat
+        }
         #endregion
     }
 }

@@ -18,7 +18,7 @@ namespace VisualProgrammingFinalProject.Model
         public CafeteriaItem()
         {
             this.CafeteriaPurchases = new HashSet<CafeteriaPurchas>();
-            this.PurchaseRestrictions = new HashSet<PurchaseRestriction>();
+            this.ParentRestrictions = new HashSet<ParentRestriction>();
         }
     
         public int ItemID { get; set; }
@@ -29,6 +29,6 @@ namespace VisualProgrammingFinalProject.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CafeteriaPurchas> CafeteriaPurchases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PurchaseRestriction> PurchaseRestrictions { get; set; }
+        public virtual ICollection<ParentRestriction> ParentRestrictions { get; set; }
     }
 }
